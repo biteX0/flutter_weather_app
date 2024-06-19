@@ -1,0 +1,1 @@
+ /Users/max/Documents/Developer/flutter_project/flutter_weather_application/.dart_tool/flutter_build/e50faf2d232c0ddb5211a7b20e034ebe/native_assets.yaml: 

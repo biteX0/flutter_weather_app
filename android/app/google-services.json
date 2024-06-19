@@ -1,0 +1,46 @@
+{
+  "project_info": {
+    "project_number": "881321476366",
+    "project_id": "wetaher",
+    "storage_bucket": "wetaher.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:881321476366:android:9f85e42cb4e38bf167175f",
+        "android_client_info": {
+          "package_name": "com.example.flutter_weather_application"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "881321476366-vajk1ua4dr7l4t9kgtmnftr5f8prnips.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAp87L4m9-es1v0hvpPQAP0IZP2XTIXUPI"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "881321476366-vajk1ua4dr7l4t9kgtmnftr5f8prnips.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "881321476366-h3l9q74av58c5ogt6ldu7p6lgdodr9r3.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.example.flutterWeatherApplication"
+              }
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
