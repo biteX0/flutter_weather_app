@@ -22,7 +22,7 @@
 		</data>
 		<key>Headers/GeolocationHandler_Test.h</key>
 		<data>
-		Y1xw1/WD6rEe4YzrND3x7ULvaP0=
+		hF9/LzFy8RHl/QaNO+fwxaDDJeM=
 		</data>
 		<key>Headers/GeolocatorPlugin.h</key>
 		<data>
@@ -74,7 +74,7 @@
 		</data>
 		<key>Info.plist</key>
 		<data>
-		vnQWkGq422mG5tSxG9xKKBxIQOY=
+		x+A7jYSF1/2Pg8NfvZXiJqONjuI=
 		</data>
 		<key>Modules/module.modulemap</key>
 		<data>
@@ -82,7 +82,7 @@
 		</data>
 		<key>geolocator_apple_privacy.bundle/Info.plist</key>
 		<data>
-		lZtLg5A9ueT/1Os6gIkUnsXyN/0=
+		zf+MUqXw1PaoWqnvFvkES4RdBWs=
 		</data>
 		<key>geolocator_apple_privacy.bundle/PrivacyInfo.xcprivacy</key>
 		<data>
@@ -123,7 +123,7 @@
 		<dict>
 			<key>hash2</key>
 			<data>
-			EEKLNxugjVk2+vFl+PeLZ9UcmRP8/9K4L+rXU5p8fgE=
+			44n+24RhWZzQh691C7n3TgjnFWFKjS5txAJS8vEE41A=
 			</data>
 		</dict>
 		<key>Headers/GeolocatorPlugin.h</key>
@@ -221,7 +221,7 @@
 		<dict>
 			<key>hash2</key>
 			<data>
-			vNfqMLg+4eohmUIGopN3KU0UFP5YnFVor2Gucqe0SSU=
+			Z7PkbwMJIDx/o7TzHWD6wAfn7hgLx59HyAyZ91jVsi4=
 			</data>
 		</dict>
 		<key>geolocator_apple_privacy.bundle/PrivacyInfo.xcprivacy</key>

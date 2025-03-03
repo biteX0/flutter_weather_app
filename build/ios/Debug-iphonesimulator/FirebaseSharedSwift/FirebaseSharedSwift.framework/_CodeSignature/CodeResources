@@ -6,7 +6,7 @@
 	<dict>
 		<key>Headers/FirebaseSharedSwift-Swift.h</key>
 		<data>
-		ExFdvKPVSxcDVa3W587PjapR5ns=
+		aVGPaNmfi+hoCF7gFBERNDsoSMo=
 		</data>
 		<key>Headers/FirebaseSharedSwift-umbrella.h</key>
 		<data>
@@ -14,39 +14,39 @@
 		</data>
 		<key>Info.plist</key>
 		<data>
-		B47YHWrfVmfwEHO2oR0TIjwe1xU=
+		XuWhLjPPF69IbvwzFz+7VQ+jcEg=
 		</data>
 		<key>Modules/FirebaseSharedSwift.swiftmodule/Project/arm64-apple-ios-simulator.swiftsourceinfo</key>
 		<data>
-		ir0frCEJCczhbhn6EZF03+mYwJY=
+		eFAcsyT3+2hSqpoOgk34pLdQl04=
 		</data>
 		<key>Modules/FirebaseSharedSwift.swiftmodule/Project/x86_64-apple-ios-simulator.swiftsourceinfo</key>
 		<data>
-		bpn5adxzXvZ+3m6RiBjakEclDA8=
+		eSQ72tu5wGd5MXR9LIHjLj0nJxE=
 		</data>
 		<key>Modules/FirebaseSharedSwift.swiftmodule/arm64-apple-ios-simulator.abi.json</key>
 		<data>
-		FSPnLbho3G+LL9smI3XgVOqBIQ4=
+		gcwBsH4BgyFY4sVtNt+/xOKS3vY=
 		</data>
 		<key>Modules/FirebaseSharedSwift.swiftmodule/arm64-apple-ios-simulator.swiftdoc</key>
 		<data>
-		aUIaPAsIUtM9joRZJybnBfK9ziU=
+		m5Oe303m9eTK5OdDanKAq+xHs5M=
 		</data>
 		<key>Modules/FirebaseSharedSwift.swiftmodule/arm64-apple-ios-simulator.swiftmodule</key>
 		<data>
-		ahydma/SYidxyz997wuTZ7HuDQg=
+		bRTbKmKkkuqHu1E/zxzRlWC1hNk=
 		</data>
 		<key>Modules/FirebaseSharedSwift.swiftmodule/x86_64-apple-ios-simulator.abi.json</key>
 		<data>
-		FSPnLbho3G+LL9smI3XgVOqBIQ4=
+		gcwBsH4BgyFY4sVtNt+/xOKS3vY=
 		</data>
 		<key>Modules/FirebaseSharedSwift.swiftmodule/x86_64-apple-ios-simulator.swiftdoc</key>
 		<data>
-		T4zNlwSZ0uOw4XfRRA4XJNxbUmI=
+		zg1ZFhjnGyNdE5ppU65a8RCDsZM=
 		</data>
 		<key>Modules/FirebaseSharedSwift.swiftmodule/x86_64-apple-ios-simulator.swiftmodule</key>
 		<data>
-		I7sgEpxRqq3Rdya7LN3cZCtKxNU=
+		lFrZBrgiJCxxp2BNAFnXpUhh+LY=
 		</data>
 		<key>Modules/module.modulemap</key>
 		<data>
@@ -59,7 +59,7 @@
 		<dict>
 			<key>hash2</key>
 			<data>
-			1NIH3jqnaXJs0JoPE9KQathi72Csd9agGhiHLiXRuFs=
+			izIwwkIH0mD+xvYF7oTMZ1Fu1NzK5XBad8C8LfWRV+k=
 			</data>
 		</dict>
 		<key>Headers/FirebaseSharedSwift-umbrella.h</key>
@@ -73,56 +73,56 @@
 		<dict>
 			<key>hash2</key>
 			<data>
-			oC7ZVOgiWDPXe//8f7i3E9G5x3SFg0bAebYuuBVlLSI=
+			uYomCn3JZWjjiIsZPnsmW2/0F8PJ7TEedeQowKE5DRM=
 			</data>
 		</dict>
 		<key>Modules/FirebaseSharedSwift.swiftmodule/Project/x86_64-apple-ios-simulator.swiftsourceinfo</key>
 		<dict>
 			<key>hash2</key>
 			<data>
-			eBiMpgGxPrHg4l6JGXqOQIeSQza6xxVj3fkW8xF58xE=
+			uq7zuvbpUk8/iBYJmSJxPUybC3THmbBREuH8FrCbh1Q=
 			</data>
 		</dict>
 		<key>Modules/FirebaseSharedSwift.swiftmodule/arm64-apple-ios-simulator.abi.json</key>
 		<dict>
 			<key>hash2</key>
 			<data>
-			KnRdWE4y6t4QM5zi5JDptPdHFgJy1Tku+7GLkZS2aNM=
+			Qnesa0n4URGWAopawg9bGx36dUwkYV00BoCJ8LFzlyg=
 			</data>
 		</dict>
 		<key>Modules/FirebaseSharedSwift.swiftmodule/arm64-apple-ios-simulator.swiftdoc</key>
 		<dict>
 			<key>hash2</key>
 			<data>
-			acba+s2T28WiOrNIO3uu7amEH3Zc2zEUWHX/3XxEmD4=
+			8uVmEWN9wIic8d0CvF3RNIURwBNfcCMnbdQMCi3SmkY=
 			</data>
 		</dict>
 		<key>Modules/FirebaseSharedSwift.swiftmodule/arm64-apple-ios-simulator.swiftmodule</key>
 		<dict>
 			<key>hash2</key>
 			<data>
-			i+ods192eOxRDTGGc0D/PqTH2vJ9hxUKd/I9GTirNKY=
+			En+KiXD9v+hm1ihsf/Ed25EDpo7cFYnK9XfPxIx7xW8=
 			</data>
 		</dict>
 		<key>Modules/FirebaseSharedSwift.swiftmodule/x86_64-apple-ios-simulator.abi.json</key>
 		<dict>
 			<key>hash2</key>
 			<data>
-			KnRdWE4y6t4QM5zi5JDptPdHFgJy1Tku+7GLkZS2aNM=
+			Qnesa0n4URGWAopawg9bGx36dUwkYV00BoCJ8LFzlyg=
 			</data>
 		</dict>
 		<key>Modules/FirebaseSharedSwift.swiftmodule/x86_64-apple-ios-simulator.swiftdoc</key>
 		<dict>
 			<key>hash2</key>
 			<data>
-			+r0kRcZ/FmlMo2HB8VL1pvyYataaBFgGOADF05qSz/k=
+			C/9L0QB+WrKzpFhvPuCl4ugtC9sVYnFyBMAVezkjo/4=
 			</data>
 		</dict>
 		<key>Modules/FirebaseSharedSwift.swiftmodule/x86_64-apple-ios-simulator.swiftmodule</key>
 		<dict>
 			<key>hash2</key>
 			<data>
-			y/QDbZYcSwgfNKv/vX2ZWFHEHPj1B4CR3j0ets6ZWFY=
+			azeVtIp6tJvCHfa0Ljc2oXqLT2RqL+/Eb66iNOYGDZA=
 			</data>
 		</dict>
 		<key>Modules/module.modulemap</key>

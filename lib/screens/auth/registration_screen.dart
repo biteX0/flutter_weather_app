@@ -1,140 +1,92 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:weather/screens/auth/login_screen.dart';
+import 'package:weather/routing/app_routes.dart';
 import 'package:weather/screens/auth/auth_controller.dart';
+import 'package:weather/theme/theme_service.dart';
+import 'package:weather/widgets/custom_button.dart';
+import 'package:weather/widgets/custom_text_field.dart';
+import 'package:weather/widgets/background_widget.dart';
 
 class RegistrationScreen extends GetView<AuthController> {
-  RegistrationScreen({Key? key}) : super(key: key);
+  const RegistrationScreen({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
+        final theme = Theme.of(context);
+
     return GestureDetector(
       onTap: () => FocusScope.of(context).unfocus(),
-      child: Scaffold(
-        appBar: AppBar(
-          backgroundColor: Colors.transparent,
-        ),
-        backgroundColor: Colors.grey[300],
-        body: SafeArea(
-          child: Center(
-            child: SingleChildScrollView(
-              child: Column(
-                children: [
-                  Padding(
-                    padding: const EdgeInsets.only(top: 20, bottom: 25),
-                    child: Text(
-                      'Регистрация',
-                      style:
-                          TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
-                    ),
+      child: Stack(
+        children: [
+          const BackgroundWidget(),
+          Scaffold(
+            backgroundColor: Colors.transparent,
+            appBar: AppBar(
+              backgroundColor: Colors.transparent,
+              actions: [
+                IconButton(
+                  icon: Icon(
+                    theme.brightness == Brightness.dark 
+                        ? Icons.light_mode 
+                        : Icons.dark_mode,
                   ),
-                  Padding(
-                    padding:
-                        const EdgeInsets.only(left: 18, right: 18, bottom: 12),
-                    child: Container(
-                      decoration: BoxDecoration(
-                          color: Colors.grey[200],
-                          border: Border.all(
-                            color: Colors.white,
-                          ),
-                          borderRadius: BorderRadius.circular(12)),
-                      child: Padding(
-                        padding: const EdgeInsets.only(left: 15),
-                        child: TextField(
-                          controller: controller.emailController.value,
-                          decoration: InputDecoration(
-                            border: InputBorder.none,
-                            hintText: 'Адрес эл. почты',
-                          ),
-                        ),
-                      ),
-                    ),
-                  ),
-                  Padding(
-                    padding:
-                        const EdgeInsets.only(left: 18, right: 18, bottom: 12),
-                    child: Container(
-                      decoration: BoxDecoration(
-                          color: Colors.grey[200],
-                          border: Border.all(
-                            color: Colors.white,
-                          ),
-                          borderRadius: BorderRadius.circular(12)),
-                      child: Padding(
-                        padding: const EdgeInsets.only(left: 15),
-                        child: TextField(
-                          controller: controller.passwordController.value,
-                          obscureText: true,
-                          decoration: InputDecoration(
-                            border: InputBorder.none,
-                            hintText: 'Пароль',
-                          ),
-                        ),
-                      ),
-                    ),
-                  ),
-                  Padding(
-                    padding:
-                        const EdgeInsets.only(left: 18, right: 18, bottom: 18),
-                    child: Container(
-                      decoration: BoxDecoration(
-                          color: Colors.grey[200],
-                          border: Border.all(
-                            color: Colors.white,
-                          ),
-                          borderRadius: BorderRadius.circular(12)),
-                      child: Padding(
-                        padding: const EdgeInsets.only(left: 15),
-                        child: TextField(
-                          controller:
-                              controller.confirmPasswordController.value,
-                          obscureText: true,
-                          decoration: InputDecoration(
-                            border: InputBorder.none,
-                            hintText: 'Повторите пароль',
-                          ),
-                        ),
-                      ),
-                    ),
-                  ),
-                  Padding(
-                    padding: const EdgeInsets.symmetric(horizontal: 18),
-                    child: Container(
-                      height: 50,
-                        width: MediaQuery.sizeOf(context).width,
-                      child: ElevatedButton(
-                          onPressed: controller.singUp,
-                          style: ElevatedButton.styleFrom(
-                              shape: RoundedRectangleBorder(
-                                  borderRadius: BorderRadius.circular(12))),
-                          child: const Text('Регистрация',
-                          style: TextStyle(fontSize: 20, color: Color.fromARGB(255, 26, 67, 130)),
-                          )),
-                    ),
-                  ),
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.center,
+                  onPressed: () => Get.find<ThemeService>().toggleTheme(),
+                ),
+              ],
+            ),
+            body: SafeArea(
+              child: Center(
+                child: SingleChildScrollView(
+                  child: Column(
                     children: [
-                      Text(
-                        'Есть учетная запись? ',
+                      Padding(
+                        padding: const EdgeInsets.only(bottom: 20),
+                        child:
+                            Text('Регистрация', 
+                          style: theme.textTheme.titleLarge,
+                            ),
                       ),
-                      TextButton(
-                        onPressed: () {
-                          Get.to(LoginScreen());
-                        },
-                        child: Text(
-                          'Вход',
-                          style: TextStyle(
-                              color: Colors.blue, fontWeight: FontWeight.bold),
-                        ),
+                      CustomTextField(
+                        textController: controller.emailController.value,
+                        hintText: 'Адрес эл. почты',
+                      ),
+                      CustomTextField(
+                        textController: controller.passwordController.value,
+                        hintText: 'Пароль',
+                        obscureText: true,
+                      ),
+                      CustomTextField(
+                        textController: controller.confirmPasswordController.value,
+                        hintText: 'Подтвердите пароль',
+                        obscureText: true,
+                      ),
+                      CustomButton(
+                        text: 'Регистрация',
+                        onPressed: controller.singUp,
+                      ),
+                      Row(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: [
+                          Text(
+                            'Есть учетная запись? ',
+                            style: theme.textTheme.bodyMedium,
+                          ),
+                          TextButton(
+                            onPressed: () => Get.offAllNamed(Routes.loginScreen),
+                            child: Text(
+                              'Вход',
+                              style: theme.textTheme.bodyMedium,
+                            ),
+                          ),
+                        ],
                       ),
                     ],
                   ),
-                ],
+                ),
               ),
             ),
           ),
-        ),
+        ],
       ),
     );
   }

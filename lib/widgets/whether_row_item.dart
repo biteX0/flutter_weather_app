@@ -1,6 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:flutter/widgets.dart';
-import 'package:weather/constants.dart';
 
 class WeatherRowItem extends StatelessWidget {
     final String icon;
@@ -14,6 +12,8 @@ class WeatherRowItem extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final theme = Theme.of(context);
+    
     return Padding(
       padding: const EdgeInsets.only(bottom: 15),
       child: Container(
@@ -21,7 +21,7 @@ class WeatherRowItem extends StatelessWidget {
           width: double.infinity,
           padding: const EdgeInsets.all(15),
           decoration: BoxDecoration(
-              color: CustomColors.cardBackgroundColor,
+              color: theme.colorScheme.surface,
               borderRadius: BorderRadius.circular(15)),
           child: Row(
             children: [
@@ -33,8 +33,7 @@ class WeatherRowItem extends StatelessWidget {
                   Text(
                     text,
                     overflow: TextOverflow.ellipsis,
-                    style: const TextStyle(
-                        color: CustomColors.cardTextColor,
+                    style: theme.textTheme.bodyMedium?.copyWith(
                         fontWeight: FontWeight.w600),
                   ),
                 ),

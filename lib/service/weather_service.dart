@@ -33,7 +33,7 @@ class WeatherService {
       permission = await Geolocator.requestPermission();
     }
     Position position = await Geolocator.getCurrentPosition(
-        desiredAccuracy: LocationAccuracy.high);
+        locationSettings: LocationSettings(accuracy: LocationAccuracy.best));
 
     List<Placemark> placemarks =
         await placemarkFromCoordinates(position.latitude, position.longitude);

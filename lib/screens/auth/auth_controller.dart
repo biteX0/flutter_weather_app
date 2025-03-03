@@ -1,6 +1,7 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:weather/routing/app_routes.dart';
 import 'package:weather/screens/auth/login_screen.dart';
 import 'package:weather/screens/home/home_screen.dart';
 
@@ -8,6 +9,13 @@ class AuthController extends GetxController {
   final emailController = TextEditingController().obs;
   final passwordController = TextEditingController().obs;
   final confirmPasswordController = TextEditingController().obs;
+
+//Очищаем поля после успешных операций
+  void clearFields() {
+    emailController.value.clear();
+    passwordController.value.clear();
+    confirmPasswordController.value.clear();
+  }
 
   Widget build(BuildContext context) {
     return Scaffold(
@@ -27,8 +35,10 @@ class AuthController extends GetxController {
   Future singInn() async {
     try {
       await FirebaseAuth.instance.signInWithEmailAndPassword(
-          email: emailController.value.text.trim(),
-          password: passwordController.value.text.trim());
+        email: emailController.value.text.trim(),
+        password: passwordController.value.text.trim()
+      );
+      clearFields();
     } catch (error) {
       Get.snackbar('Ошибка', 'Пользователь не найден');
     }
@@ -38,9 +48,11 @@ class AuthController extends GetxController {
     if (passwordConfirmed()) {
       try {
         await FirebaseAuth.instance.createUserWithEmailAndPassword(
-            email: emailController.value.text.trim(),
-            password: passwordController.value.text.trim());
-        Get.to(HomeScreen());
+          email: emailController.value.text.trim(),
+          password: passwordController.value.text.trim()
+        );
+        Get.offAllNamed(Routes.mainPage);
+        clearFields();
       } catch (error) {
         Get.snackbar('Ошибка', 'Данный аккаунт уже существует');
       }
@@ -59,10 +71,14 @@ class AuthController extends GetxController {
 
   Future passwordReset() async {
     try {
-      await FirebaseAuth.instance
-          .sendPasswordResetEmail(email: emailController.value.text.trim());
+      await FirebaseAuth.instance.sendPasswordResetEmail(
+        email: emailController.value.text.trim()
+      );
       Get.snackbar(
-          'Письмо для сброса пароля отправлено: ', emailController.value.text);
+        'Письмо для сброса пароля отправлено: ',
+        emailController.value.text,
+      );
+      clearFields();
     } on FirebaseAuthException catch (error) {
       print(error);
       Get.snackbar('Ошибка', error.message.toString());

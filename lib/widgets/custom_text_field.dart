@@ -1,0 +1,50 @@
+import 'package:flutter/material.dart';
+
+class CustomTextField extends StatelessWidget {
+  final TextEditingController textController;
+  final String hintText;
+  final bool obscureText;
+  final Widget? suffixIcon;
+  final EdgeInsetsGeometry? padding;
+
+  const CustomTextField({
+    super.key,
+    required this.textController,
+    required this.hintText,
+    this.obscureText = false,
+    this.suffixIcon,
+    this.padding = const EdgeInsets.symmetric(horizontal: 20, vertical: 12),
+  });
+
+  @override
+  Widget build(BuildContext context) {
+    final theme = Theme.of(context);
+    
+    return Padding(
+      padding: padding!,
+      child: Container(
+        decoration: BoxDecoration(
+          color: theme.colorScheme.surface,
+          border: Border.all(color: theme.colorScheme.surface),
+          borderRadius: BorderRadius.circular(7),
+        ),
+        child: Padding(
+          padding: const EdgeInsets.only(left: 15),
+          child: TextField(
+            controller: textController,
+            obscureText: obscureText,
+            style: theme.textTheme.bodyMedium,
+            decoration: InputDecoration(
+              border: InputBorder.none,
+              hintText: hintText,
+              hintStyle: theme.textTheme.bodyMedium?.copyWith(
+                color: theme.hintColor,
+              ),
+              suffixIcon: suffixIcon,
+            ),
+          ),
+        ),
+      ),
+    );
+  }
+}
