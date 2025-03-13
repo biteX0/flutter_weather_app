@@ -23,16 +23,6 @@ class RegistrationScreen extends GetView<AuthController> {
             backgroundColor: Colors.transparent,
             appBar: AppBar(
               backgroundColor: Colors.transparent,
-              actions: [
-                IconButton(
-                  icon: Icon(
-                    theme.brightness == Brightness.dark 
-                        ? Icons.light_mode 
-                        : Icons.dark_mode,
-                  ),
-                  onPressed: () => Get.find<ThemeService>().toggleTheme(),
-                ),
-              ],
             ),
             body: SafeArea(
               child: Center(
@@ -63,22 +53,6 @@ class RegistrationScreen extends GetView<AuthController> {
                       CustomButton(
                         text: 'Регистрация',
                         onPressed: controller.singUp,
-                      ),
-                      Row(
-                        mainAxisAlignment: MainAxisAlignment.center,
-                        children: [
-                          Text(
-                            'Есть учетная запись? ',
-                            style: theme.textTheme.bodyMedium,
-                          ),
-                          TextButton(
-                            onPressed: () => Get.offAllNamed(Routes.loginScreen),
-                            child: Text(
-                              'Вход',
-                              style: theme.textTheme.bodyMedium,
-                            ),
-                          ),
-                        ],
                       ),
                     ],
                   ),

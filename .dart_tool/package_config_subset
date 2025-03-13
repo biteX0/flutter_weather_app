@@ -250,6 +250,10 @@ path_provider_windows
 2.19
 file:///Users/max/.pub-cache/hosted/pub.dev/path_provider_windows-2.2.1/
 file:///Users/max/.pub-cache/hosted/pub.dev/path_provider_windows-2.2.1/lib/
+percent_indicator
+2.12
+file:///Users/max/.pub-cache/hosted/pub.dev/percent_indicator-4.2.4/
+file:///Users/max/.pub-cache/hosted/pub.dev/percent_indicator-4.2.4/lib/
 petitparser
 3.2
 file:///Users/max/.pub-cache/hosted/pub.dev/petitparser-6.0.2/
@@ -290,10 +294,6 @@ shared_preferences_windows
 3.3
 file:///Users/max/.pub-cache/hosted/pub.dev/shared_preferences_windows-2.4.1/
 file:///Users/max/.pub-cache/hosted/pub.dev/shared_preferences_windows-2.4.1/lib/
-sleek_circular_slider
-2.12
-file:///Users/max/.pub-cache/hosted/pub.dev/sleek_circular_slider-2.0.1/
-file:///Users/max/.pub-cache/hosted/pub.dev/sleek_circular_slider-2.0.1/lib/
 source_span
 2.18
 file:///Users/max/.pub-cache/hosted/pub.dev/source_span-1.10.0/

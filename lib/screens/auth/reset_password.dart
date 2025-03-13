@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:weather/screens/auth/auth_controller.dart';
-import 'package:weather/theme/theme_config.dart';
 import 'package:weather/widgets/custom_button.dart';
 import 'package:weather/widgets/custom_text_field.dart';
 import 'package:weather/widgets/background_widget.dart';

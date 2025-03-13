@@ -2,10 +2,10 @@ import 'package:flutter/material.dart';
 
 class ThemeConfig {
   // Базовые цвета для обеих тем
-  static const Color _primaryLight = Color(0xFF4B9FE1);
-  static const Color _primaryDark = Color(0xFF1A237E);
-  static const Color _textLight = Color(0xFF2E3E6D);
-  static const Color _textDark = Colors.white;
+  static const Color _primaryLight = Color.fromARGB(255, 75, 159, 225);
+  static const Color _primaryDark = Color.fromARGB(255, 26, 35, 126);
+  static const Color _textLight = Color.fromARGB(255, 46, 62, 109);
+  static const Color _textDark = Color.fromARGB(255, 229, 228, 228);
 
   // Размеры текста (можно вынести в отдельный класс TextSizes если будут использоваться в других местах)
   static const double _fontSizeTitle = 30.0;
@@ -42,9 +42,9 @@ class ThemeConfig {
     ),
     colorScheme: ColorScheme.light(
       primary: _primaryLight,
-      onPrimary: Colors.white,
+      onPrimary: const Color.fromARGB(255, 223, 220, 220),
       secondary: _textLight,
-      surface: Colors.white,
+      surface: const Color.fromARGB(255, 223, 220, 220),
       onSurface: _textLight,
     ),
   );
@@ -79,9 +79,9 @@ class ThemeConfig {
     ),
     colorScheme: ColorScheme.dark(
       primary: _primaryDark,
-      onPrimary: Colors.white,
+      onPrimary: const Color.fromARGB(255, 223, 220, 220),
       secondary: _textDark,
-      surface: const Color(0xFF333333),
+      surface: const Color.fromARGB(255, 51, 51, 51),
       onSurface: _textDark,
     ),
   );

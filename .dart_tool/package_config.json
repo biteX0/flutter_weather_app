@@ -398,6 +398,12 @@
       "languageVersion": "2.19"
     },
     {
+      "name": "percent_indicator",
+      "rootUri": "file:///Users/max/.pub-cache/hosted/pub.dev/percent_indicator-4.2.4",
+      "packageUri": "lib/",
+      "languageVersion": "2.12"
+    },
+    {
       "name": "petitparser",
       "rootUri": "file:///Users/max/.pub-cache/hosted/pub.dev/petitparser-6.0.2",
       "packageUri": "lib/",
@@ -462,12 +468,6 @@
       "rootUri": "file:///Users/max/Documents/Developer/flutter/bin/cache/pkg/sky_engine",
       "packageUri": "lib/",
       "languageVersion": "3.2"
-    },
-    {
-      "name": "sleek_circular_slider",
-      "rootUri": "file:///Users/max/.pub-cache/hosted/pub.dev/sleek_circular_slider-2.0.1",
-      "packageUri": "lib/",
-      "languageVersion": "2.12"
     },
     {
       "name": "source_span",
@@ -572,7 +572,7 @@
       "languageVersion": "3.0"
     }
   ],
-  "generated": "2025-03-03T16:48:48.980545Z",
+  "generated": "2025-03-09T11:03:52.343750Z",
   "generator": "pub",
   "generatorVersion": "3.5.3",
   "flutterRoot": "file:///Users/max/Documents/Developer/flutter",

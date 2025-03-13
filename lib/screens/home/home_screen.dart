@@ -6,11 +6,11 @@ import 'package:weather/widgets/background_widget.dart';
 import 'package:weather/screens/home/home_controller.dart';
 import 'package:weather/widgets/progress_indicator.dart';
 import 'package:weather/widgets/weather_animation_utils.dart';
-import 'package:weather/widgets/whether_row_item.dart';
 import 'package:get/get.dart';
 import 'package:intl/intl.dart';
 import 'package:lottie/lottie.dart';
 import 'package:weather/widgets/custom_text_field.dart';
+import 'package:weather/widgets/weather_tile.dart';
 
 class HomeScreen extends GetView<HomeController> {
   HomeScreen({super.key});
@@ -34,8 +34,9 @@ class HomeScreen extends GetView<HomeController> {
                 title: Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
-                    Text(user?.email ?? 'Пользователь не авторизован', 
-                    style: theme.textTheme.headlineMedium,
+                    Text(
+                      user?.email ?? 'Пользователь не авторизован',
+                      style: theme.textTheme.bodyLarge,
                     ),
                     Row(
                       children: [
@@ -84,11 +85,10 @@ class HomeScreen extends GetView<HomeController> {
                             child: Container(
                               alignment: Alignment.topLeft,
                               child: Text(
-                                controller.weatherResponse.value.cityName!,
-                                style: theme.textTheme.headlineMedium
-                                ),
-                              ),
+                                  controller.weatherResponse.value.cityName!,
+                                  style: theme.textTheme.headlineMedium),
                             ),
+                          ),
                           Container(
                             alignment: Alignment.topLeft,
                             child: Text(
@@ -110,25 +110,42 @@ class HomeScreen extends GetView<HomeController> {
                                     controller.weatherResponse.value
                                         .weatherDescriptionInfo!.description!
                                         .toUpperCase(),
-                                    style: theme.textTheme.bodyLarge,
+                                    style: theme.textTheme.headlineLarge,
                                   ),
                                 ),
                                 Text(
                                   "${controller.weatherResponse.value.mainInfoValue?.temperature?.toInt()}°",
                                   style: theme.textTheme.headlineMedium,
-                                  ),
+                                ),
                               ],
                             ),
                           ),
-                          Column(
-                            children: [
-                              ...weatherItems.map((item) => WeatherRowItem(
-                                    icon: item.icon,
-                                    text: item.getText(
-                                        controller.weatherResponse.value),
-                                  )),
-                            ],
-                          )
+                          GridView.builder(
+                            shrinkWrap: true,
+                            physics: NeverScrollableScrollPhysics(),
+                            gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+                              crossAxisCount: 2,
+                              childAspectRatio: 1.5,
+                              crossAxisSpacing: 10,
+                              mainAxisSpacing: 10,
+                            ),
+                            itemCount: weatherItems.length,
+                            itemBuilder: (context, index) {
+                              final item = weatherItems[index];
+                              final value = double.tryParse(
+                                      item.getValue(controller.weatherResponse.value)) ?? 0;
+                                      
+                              
+                              return WeatherTile(
+                                icon: item.icon,
+                                value: value,
+                                prefix: item.prefix,
+                                suffix: item.suffix,
+                                showIndicator: item.prefix == "Влажность" || 
+                                               item.prefix == "Осадки",
+                              );
+                            },
+                          ),
                         ],
                       );
                     },

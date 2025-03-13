@@ -33,13 +33,16 @@ class LoginScreen extends GetView<AuthController> {
             appBar: AppBar(
               backgroundColor: Colors.transparent,
               actions: [
-                IconButton(
-                  icon: Icon(
-                    Theme.of(context).brightness == Brightness.dark
-                        ? Icons.light_mode
-                        : Icons.dark_mode,
+                Padding(
+                  padding: const EdgeInsets.symmetric(horizontal: 20),
+                  child: IconButton(
+                    icon: Icon(
+                      Theme.of(context).brightness == Brightness.dark
+                          ? Icons.light_mode
+                          : Icons.dark_mode,
+                    ),
+                    onPressed: themeService.toggleTheme,
                   ),
-                  onPressed: themeService.toggleTheme,
                 ),
               ],
             ),
