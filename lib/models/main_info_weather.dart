@@ -5,10 +5,19 @@ class MainInfoValue {
   final num? humidity;
 
   MainInfoValue(
-      {required this.temperature,
-      required this.feelsLike,
-      required this.pressure,
-      required this.humidity});
+      {this.temperature,
+      this.feelsLike,
+      this.pressure,
+      this.humidity});
+
+  Map<String, dynamic> toJson() {
+    return {
+      'temp': temperature,
+      'feels_like': feelsLike,
+      'pressure': pressure,
+      'humidity': humidity,
+    };
+  }
 
   factory MainInfoValue.fromJson(Map<String, dynamic> json) {
     final temperature = (json['temp'] as num?)?.toInt();

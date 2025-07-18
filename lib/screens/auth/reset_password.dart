@@ -10,6 +10,11 @@ class ResetPasswordScreen extends GetView<AuthController> {
 
   @override
   Widget build(BuildContext context) {
+    
+       WidgetsBinding.instance.addPostFrameCallback((_) {
+      controller.clearFields();
+    });
+
     final theme = Theme.of(context);
     return Stack(
       children: [
@@ -22,11 +27,11 @@ class ResetPasswordScreen extends GetView<AuthController> {
           body: Column(
             children: [
               Padding(
-                padding: const EdgeInsets.all(20),
-                child: Text(
-                  'Сброс пароля',
-                  style: theme.textTheme.titleLarge,
-                )),
+                  padding: const EdgeInsets.all(20),
+                  child: Text(
+                    'Сброс пароля',
+                    style: theme.textTheme.titleLarge,
+                  )),
               CustomTextField(
                 textController: controller.confirmPasswordController.value,
                 hintText: 'Адрес эл. почты',

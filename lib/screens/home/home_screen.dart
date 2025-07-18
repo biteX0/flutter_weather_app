@@ -4,12 +4,12 @@ import 'package:weather/models/weather_item_data.dart';
 import 'package:weather/theme/theme_service.dart';
 import 'package:weather/widgets/background_widget.dart';
 import 'package:weather/screens/home/home_controller.dart';
+import 'package:weather/widgets/custom_search_field.dart';
 import 'package:weather/widgets/progress_indicator.dart';
 import 'package:weather/widgets/weather_animation_utils.dart';
 import 'package:get/get.dart';
 import 'package:intl/intl.dart';
 import 'package:lottie/lottie.dart';
-import 'package:weather/widgets/custom_text_field.dart';
 import 'package:weather/widgets/weather_tile.dart';
 
 class HomeScreen extends GetView<HomeController> {
@@ -23,132 +23,131 @@ class HomeScreen extends GetView<HomeController> {
     final theme = Theme.of(context);
     String date = DateFormat("yMMMd").format(DateTime.now());
     return GestureDetector(
-      onTap: () => FocusScope.of(context).unfocus(),
+      behavior: HitTestBehavior.translucent,
+      onTap: () {
+        final currentScope = FocusScope.of(context);
+
+        if (!currentScope.hasPrimaryFocus) {
+          currentScope.unfocus(); // только если есть фокус
+        }
+        controller.hideSearchField();
+      },
       child: Stack(
         children: [
           const BackgroundWidget(),
-          Scaffold(
-            backgroundColor: Colors.transparent,
-            appBar: AppBar(
+          RefreshIndicator(
+            onRefresh: () => controller.fetchWeather(),
+            child: Scaffold(
+              backgroundColor: Colors.transparent,
+              appBar: AppBar(
                 backgroundColor: Colors.transparent,
-                title: Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  children: [
-                    Text(
-                      user?.email ?? 'Пользователь не авторизован',
-                      style: theme.textTheme.bodyLarge,
-                    ),
-                    Row(
-                      children: [
-                        IconButton(
-                          icon: Icon(theme.brightness == Brightness.dark
-                              ? Icons.light_mode
-                              : Icons.dark_mode),
-                          onPressed: themeService.toggleTheme,
-                        ),
-                        IconButton(
-                          onPressed: () {
-                            FirebaseAuth.instance.signOut();
-                          },
-                          icon: const Icon(Icons.exit_to_app_rounded),
-                        ),
-                      ],
-                    ),
-                  ],
-                )),
-            body: RefreshIndicator(
-              onRefresh: () => controller.fetchWeather(),
-              child: ListView(
+                title: Obx(
+                  () => CustomSearchField(
+                    showInput: controller.showInput,
+                    textController: controller.cityTextController.value,
+                    onPressIconSearch: () => controller.toggleSearchInput(),
+                    onSearch: () => controller.search(),
+                    onPressSwitchTheme: themeService.toggleTheme,
+                    onPressLogout: () {
+                      FirebaseAuth.instance.signOut();
+                    },
+                    hintText: 'Введите название города',
+                    iconSearch: const Icon(Icons.search),
+                    iconSwitchTheme: Icon(theme.brightness == Brightness.dark
+                        ? Icons.light_mode
+                        : Icons.dark_mode),
+                    iconLogout: const Icon(Icons.exit_to_app_rounded),
+                    title: controller.user.value?.email ??
+                        'Пользователь не авторизован',
+                  ),
+                ),
+              ),
+              body: ListView(
+                physics: const AlwaysScrollableScrollPhysics(),
+                shrinkWrap: true,
                 padding:
-                    const EdgeInsets.symmetric(horizontal: 20, vertical: 10),
+                    const EdgeInsets.symmetric(horizontal: 20, vertical: 20),
                 scrollDirection: Axis.vertical,
                 children: [
-                  Obx(
-                    () {
-                      if (!controller.isDataComplete) {
-                        return const CustomProgressIndicator();
-                      }
-                      return Column(
-                        children: [
-                          CustomTextField(
-                            textController: controller.cityTextController.value,
-                            padding: EdgeInsets.all(0),
-                            hintText: 'Введите название города',
-                            suffixIcon: IconButton(
-                              icon: const Icon(Icons.search),
-                              color: theme.colorScheme.onSurface,
-                              onPressed: () => controller.search(),
+                  Center(
+                    child: Obx(
+                      () {
+                        // Пока данные загружаются - выводим индикатор о загрузке
+                        if (!controller.isDataComplete) {
+                          return const CustomProgressIndicator();
+                        }
+                        return Column(
+                          children: [
+                            Padding(
+                              padding: const EdgeInsets.symmetric(vertical: 15),
+                              child: Container(
+                                alignment: Alignment.topLeft,
+                                child: Text(
+                                  controller.weatherResponse.value.cityName!,
+                                  style: theme.textTheme.headlineLarge,
+                                ),
+                              ),
                             ),
-                          ),
-                          Padding(
-                            padding: const EdgeInsets.symmetric(vertical: 15),
-                            child: Container(
+                            Container(
                               alignment: Alignment.topLeft,
                               child: Text(
-                                  controller.weatherResponse.value.cityName!,
-                                  style: theme.textTheme.headlineMedium),
+                                date,
+                                style: theme.textTheme.bodyMedium,
+                              ),
                             ),
-                          ),
-                          Container(
-                            alignment: Alignment.topLeft,
-                            child: Text(
-                              date,
-                              style: theme.textTheme.bodyMedium,
-                            ),
-                          ),
-                          Padding(
-                            padding: const EdgeInsets.only(bottom: 20),
-                            child: Column(
-                              children: [
-                                Lottie.asset(
-                                    WeatherAnimationUtils.getWeatherAnimation(
-                                        controller.weatherResponse.value
-                                            .weatherDescriptionInfo?.main)),
-                                Padding(
-                                  padding: const EdgeInsets.only(top: 20),
-                                  child: Text(
-                                    controller.weatherResponse.value
-                                        .weatherDescriptionInfo!.description!
-                                        .toUpperCase(),
-                                    style: theme.textTheme.headlineLarge,
+                            Padding(
+                              padding: const EdgeInsets.only(bottom: 20),
+                              child: Column(
+                                children: [
+                                  Lottie.asset(
+                                      WeatherAnimationUtils.getWeatherAnimation(
+                                          controller.weatherResponse.value
+                                              .weatherDescriptionInfo?.main)),
+                                  Padding(
+                                    padding: const EdgeInsets.only(top: 20),
+                                    child: Text(
+                                      controller.weatherResponse.value
+                                          .weatherDescriptionInfo!.description!
+                                          .toUpperCase(),
+                                      style: theme.textTheme.headlineLarge,
+                                    ),
                                   ),
-                                ),
-                                Text(
-                                  "${controller.weatherResponse.value.mainInfoValue?.temperature?.toInt()}°",
-                                  style: theme.textTheme.headlineMedium,
-                                ),
-                              ],
+                                  Text(
+                                    "${controller.weatherResponse.value.mainInfoValue?.temperature?.toInt()}°",
+                                    style: theme.textTheme.headlineMedium,
+                                  ),
+                                ],
+                              ),
                             ),
-                          ),
-                          GridView.builder(
-                            shrinkWrap: true,
-                            physics: NeverScrollableScrollPhysics(),
-                            gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+                            GridView.count(
+                              shrinkWrap: true,
+                              physics: NeverScrollableScrollPhysics(),
                               crossAxisCount: 2,
                               childAspectRatio: 1.5,
-                              crossAxisSpacing: 10,
-                              mainAxisSpacing: 10,
+                              crossAxisSpacing: 17,
+                              mainAxisSpacing: 15,
+                              children: List.generate(
+                                weatherItems.length,
+                                (index) {
+                                  final item = weatherItems[index];
+                                  final value = double.tryParse(item.getValue(
+                                          controller.weatherResponse.value)) ??
+                                      0;
+                                  return WeatherTile(
+                                    icon: item.icon,
+                                    value: value,
+                                    prefix: item.prefix,
+                                    suffix: item.suffix,
+                                    showIndicator: item.prefix == "Влажность" ||
+                                        item.prefix == "Осадки",
+                                  );
+                                },
+                              ),
                             ),
-                            itemCount: weatherItems.length,
-                            itemBuilder: (context, index) {
-                              final item = weatherItems[index];
-                              final value = double.tryParse(
-                                      item.getValue(controller.weatherResponse.value)) ?? 0;
-                                      
-                              
-                              return WeatherTile(
-                                icon: item.icon,
-                                value: value,
-                                prefix: item.prefix,
-                                suffix: item.suffix,
-                                showIndicator: item.prefix == "Влажность" || 
-                                               item.prefix == "Осадки",
-                              );
-                            },
-                          ),
-                        ],
-                      );
-                    },
+                          ],
+                        );
+                      },
+                    ),
                   ),
                 ],
               ),

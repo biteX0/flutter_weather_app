@@ -1,8 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:weather/routing/app_routes.dart';
+import 'package:weather/models/text_field_data.dart';
 import 'package:weather/screens/auth/auth_controller.dart';
-import 'package:weather/theme/theme_service.dart';
 import 'package:weather/widgets/custom_button.dart';
 import 'package:weather/widgets/custom_text_field.dart';
 import 'package:weather/widgets/background_widget.dart';
@@ -12,7 +11,28 @@ class RegistrationScreen extends GetView<AuthController> {
 
   @override
   Widget build(BuildContext context) {
-        final theme = Theme.of(context);
+    final theme = Theme.of(context);
+
+    final fields = [
+      TextFieldData(
+        textController: controller.emailController.value,
+        hintText: 'Адрес эл. почты',
+      ),
+      TextFieldData(
+        textController: controller.passwordController.value,
+        hintText: 'Пароль',
+        isPassword: true,
+      ),
+      TextFieldData(
+        textController: controller.confirmPasswordController.value,
+        hintText: 'Подтвердите пароль',
+        isPassword: true,
+      ),
+    ];
+
+    WidgetsBinding.instance.addPostFrameCallback((_) {
+      controller.clearFields();
+    });
 
     return GestureDetector(
       onTap: () => FocusScope.of(context).unfocus(),
@@ -25,37 +45,34 @@ class RegistrationScreen extends GetView<AuthController> {
               backgroundColor: Colors.transparent,
             ),
             body: SafeArea(
-              child: Center(
-                child: SingleChildScrollView(
-                  child: Column(
-                    children: [
-                      Padding(
-                        padding: const EdgeInsets.only(bottom: 20),
-                        child:
-                            Text('Регистрация', 
-                          style: theme.textTheme.titleLarge,
-                            ),
+              child: SingleChildScrollView(
+                child: Column(
+                  children: [
+                    Padding(
+                      padding: const EdgeInsets.only(bottom: 20),
+                      child: Text(
+                        'Регистрация',
+                        style: theme.textTheme.titleLarge,
                       ),
-                      CustomTextField(
-                        textController: controller.emailController.value,
-                        hintText: 'Адрес эл. почты',
+                    ),
+                    ...fields.map(
+                      (field) => Obx(
+                        () => CustomTextField(
+                          textController: field.textController,
+                          hintText: field.hintText,
+                          obscureText: field.obscureText.value,
+                          suffixIcon: field.suffixIcon,
+                          isPassword: field.isPassword,
+                          onPressVisibilityPassword:
+                              field.toggleObscurePassword,
+                        ),
                       ),
-                      CustomTextField(
-                        textController: controller.passwordController.value,
-                        hintText: 'Пароль',
-                        obscureText: true,
-                      ),
-                      CustomTextField(
-                        textController: controller.confirmPasswordController.value,
-                        hintText: 'Подтвердите пароль',
-                        obscureText: true,
-                      ),
-                      CustomButton(
-                        text: 'Регистрация',
-                        onPressed: controller.singUp,
-                      ),
-                    ],
-                  ),
+                    ),
+                    CustomButton(
+                      text: 'Регистрация',
+                      onPressed: controller.singUp,
+                    ),
+                  ],
                 ),
               ),
             ),

@@ -37,10 +37,8 @@ class ThemeService extends GetxService {
 
   // Обновление темы приложения и системных UI элементов
   Future<void> _updateTheme() async {
-    // Обновляем тему приложения
     Get.changeThemeMode(_isDarkTheme.value ? ThemeMode.dark : ThemeMode.light);
 
-    // Обновляем системные UI элементы
     if (Platform.isAndroid) {
       final color = _isDarkTheme.value ? Colors.black : Colors.white;
       SystemChrome.setSystemUIOverlayStyle(

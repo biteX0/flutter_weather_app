@@ -34,9 +34,12 @@ class WeatherTile extends StatelessWidget {
             child: Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
-                Text(
-                  prefix,
-                  style: theme.textTheme.bodyMedium,
+                Expanded(
+                  child: Text(
+                    prefix,
+                    style: theme.textTheme.bodyMedium,
+                    overflow: TextOverflow.ellipsis,
+                  ),
                 ),
                 Align(
                   alignment: Alignment.topRight,
@@ -45,7 +48,7 @@ class WeatherTile extends StatelessWidget {
               ],
             ),
           ),
-          Expanded(
+          Flexible(
             child: Center(
               child: showIndicator
                   ? CircularIndicator(

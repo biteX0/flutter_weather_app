@@ -25,26 +25,13 @@
 
 ## 🛠 Технологии
 
-- Flutter
 - Dart
+- Flutter
 - GetX для управления состоянием
 - Firebase Authentication
 - OpenWeather API
 - Lottie для анимаций
 - SharedPreferences для локального хранения
-
-## 📦 Зависимости
-yaml
-dependencies:
-flutter:
-sdk: flutter
-get: ^4.6.5
-firebase_core: ^2.24.2
-firebase_auth: ^4.15.3
-google_sign_in: ^6.1.6
-shared_preferences: ^2.2.2
-lottie: ^2.7.0
-intl: ^0.18.1
 
 
 ## 🚀 Установка

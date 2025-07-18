@@ -1,4 +1,4 @@
-import 'package:weather/models/weather_response.dart';
+import 'package:weather/service/weather_response.dart';
 
 class WeatherItemData {
   final String icon;
@@ -14,10 +14,6 @@ class WeatherItemData {
     required this.getValue,
     this.showIndicator = false,
   });
-
-  String getText(WeatherResponse response) {
-    return "${getValue(response)} $suffix";
-  }
 }
 
 final weatherItems = [

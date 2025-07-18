@@ -1,14 +1,36 @@
+import 'dart:async';
+
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:weather/routing/app_routes.dart';
-import 'package:weather/screens/auth/login_screen.dart';
-import 'package:weather/screens/home/home_screen.dart';
+import 'package:weather/snackbar_error_messages/barrel_file_snackbar.dart';
 
 class AuthController extends GetxController {
   final emailController = TextEditingController().obs;
   final passwordController = TextEditingController().obs;
   final confirmPasswordController = TextEditingController().obs;
+  RxBool isSignedIn = false.obs;
+  StreamSubscription<User?>? _authStateSubscription;
+
+  @override
+  void onInit() {
+    super.onInit();
+    _authStateSubscription =
+        FirebaseAuth.instance.authStateChanges().listen((User? user) {
+      if (user != null) {
+        isSignedIn.value = true;
+      } else {
+        isSignedIn.value = false;
+      }
+    });
+  }
+
+  @override
+  void onClose() {
+    _authStateSubscription?.cancel();
+    super.onClose();
+  }
 
 //Очищаем поля после успешных операций
   void clearFields() {
@@ -17,30 +39,16 @@ class AuthController extends GetxController {
     confirmPasswordController.value.clear();
   }
 
-  Widget build(BuildContext context) {
-    return Scaffold(
-      body: StreamBuilder<User?>(
-        stream: FirebaseAuth.instance.authStateChanges(),
-        builder: (context, snapshot) {
-          if (snapshot.hasData) {
-            return HomeScreen();
-          } else {
-            return LoginScreen();
-          }
-        },
-      ),
-    );
-  }
-
   Future singInn() async {
     try {
       await FirebaseAuth.instance.signInWithEmailAndPassword(
-        email: emailController.value.text.trim(),
-        password: passwordController.value.text.trim()
-      );
+          email: emailController.value.text.trim(),
+          password: passwordController.value.text.trim());
       clearFields();
     } catch (error) {
-      Get.snackbar('Ошибка', 'Пользователь не найден');
+      SnackbarManager.showAppSnackBar(
+        PredefinedMessage(SnackBarMessages.userNotFound),
+      );
     }
   }
 
@@ -48,13 +56,14 @@ class AuthController extends GetxController {
     if (passwordConfirmed()) {
       try {
         await FirebaseAuth.instance.createUserWithEmailAndPassword(
-          email: emailController.value.text.trim(),
-          password: passwordController.value.text.trim()
-        );
+            email: emailController.value.text.trim(),
+            password: passwordController.value.text.trim());
         Get.offAllNamed(Routes.mainPage);
         clearFields();
       } catch (error) {
-        Get.snackbar('Ошибка', 'Данный аккаунт уже существует');
+        SnackbarManager.showAppSnackBar(
+          PredefinedMessage(SnackBarMessages.accountExists),
+        );
       }
     }
   }
@@ -64,24 +73,26 @@ class AuthController extends GetxController {
         confirmPasswordController.value.text.trim()) {
       return true;
     } else {
-      Get.snackbar('Ошибка', 'Пароли не совпадают');
+      SnackbarManager.showAppSnackBar(
+        PredefinedMessage(SnackBarMessages.passwordsDontMatch),
+      );
       return false;
     }
   }
 
   Future passwordReset() async {
     try {
-      await FirebaseAuth.instance.sendPasswordResetEmail(
-        email: emailController.value.text.trim()
-      );
-      Get.snackbar(
-        'Письмо для сброса пароля отправлено: ',
-        emailController.value.text,
+      await FirebaseAuth.instance
+          .sendPasswordResetEmail(email: emailController.value.text.trim());
+      SnackbarManager.showAppSnackBar(
+        PredefinedMessage(SnackBarMessages.emailSend),
       );
       clearFields();
     } on FirebaseAuthException catch (error) {
       print(error);
-      Get.snackbar('Ошибка', error.message.toString());
+      SnackbarManager.showAppSnackBar(
+        PredefinedMessage(SnackBarMessages.errorResetPassword),
+      );
     }
   }
 }

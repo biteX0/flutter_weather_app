@@ -1,6 +1,6 @@
 import 'package:firebase_auth/firebase_auth.dart';
-import 'package:get/get.dart';
 import 'package:google_sign_in/google_sign_in.dart';
+import 'package:weather/snackbar_error_messages/barrel_file_snackbar.dart';
 
 class AuthGoogleService {
   singInWithGoogle() async {
@@ -16,7 +16,9 @@ class AuthGoogleService {
       );
       return await FirebaseAuth.instance.signInWithCredential(credential);
     } catch (error) {
-      Get.snackbar('Ошибка', 'Пользователь не найден');
+      SnackbarManager.showAppSnackBar(
+        PredefinedMessage(SnackBarMessages.userNotFound),
+      );
     }
   }
 }

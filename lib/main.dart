@@ -37,6 +37,7 @@ class MyApp extends GetView<AuthController> {
       themeMode: ThemeMode.system,
       initialRoute: AppPages.initial,
       getPages: AppPages.pages,
+      
     );
   }
 }

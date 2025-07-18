@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:weather/models/text_field_data.dart';
 import 'package:weather/routing/app_routes.dart';
 import 'package:weather/screens/auth/auth_controller.dart';
 import 'package:weather/service/auth_google_service.dart';
@@ -10,13 +11,25 @@ import 'package:weather/widgets/custom_text_field.dart';
 import 'package:weather/widgets/background_widget.dart';
 
 class LoginScreen extends GetView<AuthController> {
-  const LoginScreen({Key? key}) : super(key: key);
+  LoginScreen({Key? key}) : super(key: key);
 
   ThemeService get themeService => Get.find<ThemeService>();
 
   @override
   Widget build(BuildContext context) {
-    final textTheme = Theme.of(context).textTheme;
+    final theme = Theme.of(context);
+
+    final fields = [
+      TextFieldData(
+        textController: controller.emailController.value,
+        hintText: 'Адрес эл. почты',
+      ),
+      TextFieldData(
+        textController: controller.passwordController.value,
+        hintText: 'Пароль',
+        isPassword: true,
+      ),
+    ];
 
     // Очищаем поля при каждом построении экрана
     WidgetsBinding.instance.addPostFrameCallback((_) {
@@ -55,20 +68,20 @@ class LoginScreen extends GetView<AuthController> {
                         padding: const EdgeInsets.only(top: 20, bottom: 25),
                         child: Text(
                           'Вход',
-                          style: textTheme.titleLarge,
+                          style: theme.textTheme.titleLarge,
                         ),
                       ),
-                      Obx(
-                        () => CustomTextField(
-                          textController: controller.emailController.value,
-                          hintText: 'Адрес эл. почты',
-                        ),
-                      ),
-                      Obx(
-                        () => CustomTextField(
-                          textController: controller.passwordController.value,
-                          hintText: 'Пароль',
-                          obscureText: true,
+                      ...fields.map(
+                        (field) => Obx(
+                          () => CustomTextField(
+                            textController: field.textController,
+                            hintText: field.hintText,
+                            obscureText: field.obscureText.value,
+                            suffixIcon: field.suffixIcon,
+                            isPassword: field.isPassword,
+                            onPressVisibilityPassword:
+                                field.toggleObscurePassword,
+                          ),
                         ),
                       ),
                       Row(
@@ -81,8 +94,12 @@ class LoginScreen extends GetView<AuthController> {
                                   Get.toNamed(Routes.resetPassword),
                               child: Text(
                                 'Сбросить пароль',
-                                style: textTheme.labelMedium?.copyWith(
+                                style: theme.textTheme.labelMedium?.copyWith(
                                   fontWeight: FontWeight.bold,
+                                  color: theme.colorScheme.onPrimary,
+                                  decoration: TextDecoration.underline,
+                                  decorationColor: theme.colorScheme.onPrimary,
+                                  decorationStyle: TextDecorationStyle.solid,
                                 ),
                               ),
                             ),
@@ -112,7 +129,7 @@ class LoginScreen extends GetView<AuthController> {
                                   const EdgeInsets.symmetric(horizontal: 5),
                               child: Text(
                                 'Или войти с помощью',
-                                style: textTheme.bodyMedium,
+                                style: theme.textTheme.bodyMedium,
                               ),
                             ),
                             Expanded(
@@ -147,14 +164,19 @@ class LoginScreen extends GetView<AuthController> {
                         children: [
                           Text(
                             'Нет учетной записи? ',
-                            style: textTheme.bodyMedium,
+                            style: theme.textTheme.bodyMedium,
                           ),
                           TextButton(
-                            onPressed: () => Get.toNamed(Routes.registration),
+                            onPressed: () =>
+                                Get.toNamed(Routes.registration),
                             child: Text(
                               'Регистрация',
-                              style: textTheme.labelMedium?.copyWith(
+                              style: theme.textTheme.labelMedium?.copyWith(
                                 fontWeight: FontWeight.bold,
+                                color: theme.colorScheme.onPrimary,
+                                decoration: TextDecoration.underline,
+                                decorationColor: theme.colorScheme.onPrimary,
+                                decorationStyle: TextDecorationStyle.solid,
                               ),
                             ),
                           ),
