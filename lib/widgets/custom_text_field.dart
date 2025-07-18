@@ -55,7 +55,7 @@ class CustomTextField extends StatelessWidget {
                           obscureText ? Icons.visibility : Icons.visibility_off,
                         ),
                       )
-                    : null,
+                    : suffixIcon,
               ),
             ),
           ),
