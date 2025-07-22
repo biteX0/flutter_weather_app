@@ -85,4 +85,4 @@
 
 ## 👥 Авторы
 
-- [@biteX0](https://github.com/biteX0)
+- [Max Vateev](https://github.com/biteX0)
