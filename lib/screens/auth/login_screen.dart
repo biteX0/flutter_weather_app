@@ -31,7 +31,7 @@ class LoginScreen extends GetView<AuthController> {
       ),
     ];
 
-    // Очищаем поля при каждом построении экрана
+    // Очищаем поля ввода
     WidgetsBinding.instance.addPostFrameCallback((_) {
       controller.clearFields();
     });

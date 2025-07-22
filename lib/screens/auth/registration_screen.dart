@@ -30,10 +30,6 @@ class RegistrationScreen extends GetView<AuthController> {
       ),
     ];
 
-    WidgetsBinding.instance.addPostFrameCallback((_) {
-      controller.clearFields();
-    });
-
     return GestureDetector(
       onTap: () => FocusScope.of(context).unfocus(),
       child: Stack(

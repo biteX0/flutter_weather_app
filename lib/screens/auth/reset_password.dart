@@ -10,12 +10,8 @@ class ResetPasswordScreen extends GetView<AuthController> {
 
   @override
   Widget build(BuildContext context) {
-    
-       WidgetsBinding.instance.addPostFrameCallback((_) {
-      controller.clearFields();
-    });
-
     final theme = Theme.of(context);
+    
     return Stack(
       children: [
         const BackgroundWidget(),
